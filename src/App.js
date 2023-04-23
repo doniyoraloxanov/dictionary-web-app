@@ -1,12 +1,19 @@
 import SearchBar from "./components/SearchBar";
-// import axios from "axios";
 import SearchList from "./components/SearchList";
 import { useState, useEffect } from "react";
 import Switcher from "./components/Switcher";
+import Dropdown from "./components/Dropdown";
 
 function App() {
   const [words, setWords] = useState([]);
   const [word, setWord] = useState("");
+  const [font, setFont] = useState("");
+
+  const options = [
+    { value: "sans", label: "Sans Serif" },
+    { value: "serif", label: "Serif" },
+    { value: "mono", label: "Mono" },
+  ];
 
   const fetchUserData = () => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}
@@ -27,9 +34,18 @@ function App() {
     setWord(item);
   };
 
+  const getFont = (font) => {
+    setFont(font);
+  };
+
   return (
-    <div className="flex flex-col  pt-8 px-10 min-h-screen dark:bg-gray-900  ">
-      <div className="max-w-3xl  flex    flex-col  mx-auto w-full ">
+    <div
+      className={`flex flex-col  pt-8 px-10 min-h-screen dark:bg-gray-900 font-${font} `}
+    >
+      <div
+        className={`max-w-3xl  flex flex-col  mx-auto w-full "
+        }`}
+      >
         <div className="flex items-center justify-between mb-8  ">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -49,13 +65,19 @@ function App() {
               <path d="M11 9h12" />
             </g>
           </svg>
-          <Switcher />
+          <div className=" flex space-x-2 relative">
+            <div className="absolute top-1 right-20 z-50">
+              <Dropdown options={options} onFont={getFont} />
+            </div>
+            <Switcher />
+          </div>
         </div>
-        <div className="mb-8  ">
+        <div className="mb-8 z-20  ">
           <SearchBar onCreate={getValue} />
         </div>
+
         <div className="dark:text-white">
-          <SearchList words={words} />
+          <SearchList words={words} placeHolder="Sans Serif" />
         </div>
       </div>
     </div>

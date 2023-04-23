@@ -19,7 +19,8 @@ export default function Switcher() {
         <DarkModeSwitch
           checked={darkSide}
           onChange={toggleDarkMode}
-          size={50}
+          size={45}
+          className="dark:text-purple-500"
         />
       </div>
     </>
