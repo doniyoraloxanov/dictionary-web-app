@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { GoChevronUp } from "react-icons/go";
 
-const Dropdown = ({ options, placeHolder, onFont }) => {
+const Dropdown = ({ options, onFont }) => {
   const [isOpen, setIsopen] = useState(false);
   const [selectedValue, setSelectedValue] = useState({});
 
@@ -32,6 +32,7 @@ const Dropdown = ({ options, placeHolder, onFont }) => {
   const onItemClick = (option) => {
     setSelectedValue(option);
     onFont(option.value);
+    console.log(option.value);
   };
 
   return (
@@ -40,7 +41,7 @@ const Dropdown = ({ options, placeHolder, onFont }) => {
         onClick={handleIconChange}
         className="text-bold text-lg   flex space-x-4 items-center  dark:text-white"
       >
-        {!selectedValue.label ? "Sans Serif" : selectedValue.label}
+        {!selectedValue.label ? "Sans" : selectedValue.label}
 
         <span className="ml-2">
           {!isOpen ? (

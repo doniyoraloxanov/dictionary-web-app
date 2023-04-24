@@ -3,31 +3,46 @@ import SearchList from "./components/SearchList";
 import { useState, useEffect } from "react";
 import Switcher from "./components/Switcher";
 import Dropdown from "./components/Dropdown";
+import ErrorPage from "./components/ErrorPage";
+import axios from "axios";
 
 function App() {
   const [words, setWords] = useState([]);
   const [word, setWord] = useState("");
   const [font, setFont] = useState("");
+  const [error, setError] = useState(null);
 
   const options = [
-    { value: "sans", label: "Sans Serif" },
+    { value: "sans", label: "Sans" },
     { value: "serif", label: "Serif" },
     { value: "mono", label: "Mono" },
   ];
 
   const fetchUserData = () => {
     fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}
+
     `)
       .then((response) => {
+        if (!response.ok) {
+          throw Error("Error happened babe!");
+        }
+
         return response.json();
       })
       .then((data) => {
         setWords(data);
+        setError(null);
+      })
+      .catch((err) => {
+        setError(err.message);
+        console.log(err);
       });
   };
 
   useEffect(() => {
-    fetchUserData();
+    if (word) {
+      fetchUserData();
+    }
   }, [word]);
 
   const getValue = (item) => {
@@ -72,12 +87,15 @@ function App() {
             <Switcher />
           </div>
         </div>
-        <div className="mb-8 z-20  ">
+
+        {/* Search */}
+        <div className="mb-16 z-20  ">
           <SearchBar onCreate={getValue} />
         </div>
 
         <div className="dark:text-white">
-          <SearchList words={words} placeHolder="Sans Serif" />
+          {error && <ErrorPage />}
+          {!error && <SearchList words={words} placeHolder="Sans Serif" />}
         </div>
       </div>
     </div>
