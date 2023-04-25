@@ -31,7 +31,7 @@ Users should be able to:
 ### Screenshot
 
 **Light Theme**
-![Dictionary Light Theme]((./assets/light.png)
+![Dictionary Light Theme](./assets/light.png)
 **Dark Theme**
 ![Dictionary Dark Theme](./assets/dark.png)
 
