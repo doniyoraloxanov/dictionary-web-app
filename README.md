@@ -31,9 +31,9 @@ Users should be able to:
 ### Screenshot
 
 **Light Theme**
-![Dictionary Light Theme](https://user-images.githubusercontent.com/31222712/220158495-1aaf77b8-8565-4af9-8447-7987b81382d5.png)
+![Dictionary Light Theme]((./assets/light.png)
 **Dark Theme**
-![Dictionary Dark Theme](https://user-images.githubusercontent.com/31222712/220158799-efbe23eb-f8f6-4814-bf6d-8cd76d97d2b3.png)
+![Dictionary Dark Theme](./assets/dark.png)
 
 ### Links
 
