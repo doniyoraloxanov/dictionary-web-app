@@ -1,8 +1,11 @@
 import { GoSearch } from "react-icons/go";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import WordsConetxt from "../context/words-context";
 
-const SearchBar = ({ onCreate }) => {
+const SearchBar = () => {
   const [item, setItem] = useState("");
+
+  const { getWord } = useContext(WordsConetxt);
 
   const handleChange = (event) => {
     setItem(event.target.value);
@@ -10,7 +13,7 @@ const SearchBar = ({ onCreate }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    onCreate(item);
+    getWord(item);
   };
 
   return (

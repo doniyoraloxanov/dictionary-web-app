@@ -1,57 +1,19 @@
 import SearchBar from "./components/SearchBar";
 import SearchList from "./components/SearchList";
-import { useState, useEffect } from "react";
+import { useEffect, useContext } from "react";
 import Switcher from "./components/Switcher";
 import Dropdown from "./components/Dropdown";
 import ErrorPage from "./components/ErrorPage";
-import axios from "axios";
+import WordsConetxt from "./context/words-context";
 
 function App() {
-  const [words, setWords] = useState([]);
-  const [word, setWord] = useState("");
-  const [font, setFont] = useState("");
-  const [error, setError] = useState(null);
-
-  const options = [
-    { value: "sans", label: "Sans" },
-    { value: "serif", label: "Serif" },
-    { value: "mono", label: "Mono" },
-  ];
-
-  const fetchUserData = () => {
-    fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${word}
-
-    `)
-      .then((response) => {
-        if (!response.ok) {
-          throw Error("Error happened babe!");
-        }
-
-        return response.json();
-      })
-      .then((data) => {
-        setWords(data);
-        setError(null);
-      })
-      .catch((err) => {
-        setError(err.message);
-        console.log(err);
-      });
-  };
+  const { word, error, font, fetchUserData } = useContext(WordsConetxt);
 
   useEffect(() => {
     if (word) {
       fetchUserData();
     }
   }, [word]);
-
-  const getValue = (item) => {
-    setWord(item);
-  };
-
-  const getFont = (font) => {
-    setFont(font);
-  };
 
   return (
     <div
@@ -82,7 +44,7 @@ function App() {
           </svg>
           <div className=" flex space-x-2 relative">
             <div className="absolute top-1 right-20 z-50">
-              <Dropdown options={options} onFont={getFont} />
+              <Dropdown />
             </div>
             <Switcher />
           </div>
@@ -90,12 +52,12 @@ function App() {
 
         {/* Search */}
         <div className="mb-16 z-20  ">
-          <SearchBar onCreate={getValue} />
+          <SearchBar />
         </div>
 
         <div className="dark:text-white">
           {error && <ErrorPage />}
-          {!error && <SearchList words={words} placeHolder="Sans Serif" />}
+          {!error && <SearchList placeHolder="Sans Serif" />}
         </div>
       </div>
     </div>
@@ -103,17 +65,3 @@ function App() {
 }
 
 export default App;
-
-// const fetchUserData = () => {
-//   fetch("https://jsonplaceholder.typicode.com/users")
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) => {
-//       setUsers(data);
-//     });
-// };
-
-// useEffect(() => {
-//   fetchUserData();
-// }, []);

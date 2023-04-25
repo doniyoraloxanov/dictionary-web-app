@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
 import { GoChevronDown } from "react-icons/go";
 import { GoChevronUp } from "react-icons/go";
+import { useContext } from "react";
+import WordsConetxt from "../context/words-context";
 
-const Dropdown = ({ options, onFont }) => {
+const Dropdown = () => {
   const [isOpen, setIsopen] = useState(false);
   const [selectedValue, setSelectedValue] = useState({});
+
+  const { options, getFont } = useContext(WordsConetxt);
 
   useEffect(() => {
     const handler = () => setIsopen(false);
@@ -21,18 +25,9 @@ const Dropdown = ({ options, onFont }) => {
     setIsopen(!isOpen);
   };
 
-  // const getDisplay = () => {
-  //   if (selectedValue) {
-  //     return selectedValue.label;
-  //   }
-
-  //   return placeHolder;
-  // };
-
   const onItemClick = (option) => {
     setSelectedValue(option);
-    onFont(option.value);
-    console.log(option.value);
+    getFont(option.value);
   };
 
   return (
