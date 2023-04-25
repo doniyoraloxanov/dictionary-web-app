@@ -37,7 +37,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [**Here**](https://adkenney-dictionary-app.netlify.app/)
+- Live Site URL: [**Here**](https://dictionary-web-crbh5kubt-doniyoraloxanov.vercel.app)
 
 ## My process
 
@@ -47,7 +47,7 @@ Users should be able to:
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
 - [Dictionary API](https://dictionaryapi.dev/) - For the definition data
-- CSS Modules - For styles
+- Tailwind - For styles
 
 ## Author
 
