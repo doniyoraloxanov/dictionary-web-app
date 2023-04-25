@@ -34,6 +34,7 @@ Users should be able to:
 ![Dictionary Light Theme](./assets/light.png)
 **Dark Theme**
 ![Dictionary Dark Theme](./assets/dark.png)
+push
 
 ### Links
 
